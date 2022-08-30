@@ -225,17 +225,14 @@ def getImageMessage(originalContentUrl):
 
 
 def replyMessage(payload):
-    response = {}  # post
-    headers = {
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
-    }
-    url = 'https://linebothank1209.herokuapp.com'
-    requests.post(url, data=json.dumps(payload["messages"]), headers=headers)
+    r = requests.post('https://api.line.me/v2/bot/message/reply', data=json.dumps(payload), headers=HEADER)
+    print(r.content)
     return 'OK'
 
 
 def pushMessage(payload):
-    response = {}
+    r = requests.post('https://api.line.me/v2/bot/message/reply', data=json.dumps(payload), headers=HEADER)
+    print(r.content)
     return 'OK'
 
 
