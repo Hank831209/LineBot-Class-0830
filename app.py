@@ -216,6 +216,7 @@ def getCarouselMessage(data):
     return message
 
 
+# ??????????????????????????????????????????????????
 def getLocationConfirmMessage(title, latitude, longitude):
     data = {'title': title, 'latitude': latitude, 'longitude': longitude, 'action': 'get_near'}
     # postback: 用戶的點擊動作會回傳到後台,
@@ -243,7 +244,22 @@ def getLocationConfirmMessage(title, latitude, longitude):
 
 
 def getCallCarMessage(data):
-    message = dict()
+    message = {
+        "type": "template",
+        "altText": "This is a buttons template",
+        "template": {
+            "type": "buttons",
+            "text": f"請選擇至{data['title']}預約叫車時間",
+            "actions": [
+                {
+                    "type": "datetimepicker",
+                    "label": "預約",
+                    "data": json.dumps(data),
+                    "mode": 'datetime'
+                }
+            ]
+        }
+    }
     return message
 
 
