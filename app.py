@@ -167,9 +167,21 @@ def sendTextMessageToMe():
 
 def getNameEmojiMessage():
     lookUpStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    productId = "5ac21a8c040ab15980c9b43f"
-    name = ""
+    productId = "5ac21a8c040ab15980c9b43f"  # 英文表情
+    name = "Hank"
     message = dict()
+    message['type'] = 'text'
+    message['text'] = ''.join('$' for _ in range(len(name)))
+    emoji_list = list()
+    for i, nCHar in enumerate(name):
+        emoji_list.append(
+            {
+                'index': i,
+                'productID': productId,
+                'emojiId': f'{lookUpStr.index(nCHar) + 1 :03}'
+            }
+        )
+        message['emojis'] = emoji_list
     return message
 
 
@@ -237,12 +249,18 @@ def pushMessage(payload):
 
 
 def getTotalSentMessageCount():
+    # 官方文件api上面寫說回傳的是json, 提供以下範例
+    # ex:
+    # {
+    #   "totalUsage": "500"
+    # }
     r = requests.get('https://api.line.me/v2/bot/message/quota/consumption', headers=HEADER)
     print(r.json())
     return r.json()["totalUsage"]
 
 
 def getTodayCovid19Message():
+    # api回傳json, 解析一下就好
     r = requests.get('https://covid-19.nchc.org.tw/api/covid19?CK=covid-19@nchc.org.tw&querydata=3001&limited=BGD',
                      headers=HEADER)
     data = r.json()[0]
