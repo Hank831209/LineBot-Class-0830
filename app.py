@@ -194,21 +194,19 @@ def getCarouselMessage(data):
             "columns": [
                 {
                     "imageUrl": F"{end_point}/static/taipei_101.jpeg",
-                    "action":
-                        {
-                            "type": "postback",
-                            "label": "台北101",
-                            "data": json.dumps(data)
-                        }
+                    "action": {
+                        "type": "postback",
+                        "label": "台北101",
+                        "data": json.dumps(data)
+                    }
                 },
                 {
                     "imageUrl": F"{end_point}/static/taipei_1.jpeg",
-                    "action":
-                        {
-                            "type": "postback",
-                            "label": "台北101",
-                            "text": json.dumps(data)
-                        }
+                    "action": {
+                        "type": "postback",
+                        "label": "台北101",
+                        "data": json.dumps(data)
+                    }
                 }
             ]
         }
@@ -246,16 +244,16 @@ def getLocationConfirmMessage(title, latitude, longitude):
 def getCallCarMessage(data):
     message = {
         "type": "template",
-        "altText": "This is a buttons template",
+        "altText": "this is a template",
         "template": {
             "type": "buttons",
-            "text": f"請選擇至{data['title']}預約叫車時間",
+            "text": f"請選擇至 {data['title']} 預約叫車時間",
             "actions": [
                 {
                     "type": "datetimepicker",
                     "label": "預約",
                     "data": json.dumps(data),
-                    "mode": 'datetime'
+                    "mode": "datetime"
                 }
             ]
         }
