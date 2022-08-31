@@ -247,8 +247,8 @@ def getTodayCovid19Message():
                      headers=HEADER)
     data = r.json()[0]
     date = data['a04']
-    total_count = date['a05']
-    count = date['a06']
+    total_count = data['a05']
+    count = data['a06']
     return F"日期：{date}, 人數：{count}, 確診總人數：{total_count}"
 
 
