@@ -171,7 +171,7 @@ def getNameEmojiMessage():
     name = "Hank"
     message = dict()
     message['type'] = 'text'
-    message['text'] = ''.join('$' for _ in range(len(name)))
+    message['text'] = ''.join('$' for _ in range(len(name)))  # '$$$$'
     emoji_list = list()
     for i, nCHar in enumerate(name):
         emoji_list.append(
@@ -201,6 +201,7 @@ def getCallCarMessage(data):
 
 
 def getPlayStickerMessage():
+    # 官方文件規範格式, 指定貼圖ID即可回傳貼圖
     message = {
       "type": "sticker",
       "packageId": "446",
@@ -210,12 +211,23 @@ def getPlayStickerMessage():
 
 
 def getTaipei101LocationMessage():
-    message = dict()
+    # 經緯度, @25.0335763,121.5616328
+    message = {
+        "type": "location",
+        "title": "Taipei101",
+        "address": "110台北市信義區市府路45號",
+        "latitude": 25.0335763,
+        "longitude": 121.5616328
+    }
     return message
 
 
-def getMRTVideoMessage():
-    message = dict()
+def getMRTVideoMessage(originalContentUrl=F"{end_point}/static/taipei_101_video.mp4"):
+    message = {
+        "type": "video",
+        "originalContentUrl": originalContentUrl,
+        "previewImageUrl": originalContentUrl,
+    }
     return message
 
 
@@ -236,7 +248,11 @@ def getTaipei101ImageMessage(originalContentUrl=F"{end_point}/static/taipei_101.
 
 
 def getImageMessage(originalContentUrl):
-    message = dict()
+    message = {
+        "type": "image",
+        "originalContentUrl": originalContentUrl,
+        "previewImageUrl": originalContentUrl
+    }
     return message
 
 
